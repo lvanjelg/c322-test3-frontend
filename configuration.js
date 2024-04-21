@@ -1,10 +1,10 @@
 const mode = 0;
 
 const host_local = "http://localhost:8080";
-const host_remote = "https://c322-test3-backend-latest-qx4g.onrender.com/";
+const host_remote = "https://c322-test3-backend-latest-qx4g.onrender.com";
 
 function getHost() {
-    return host_remote;
+    return "https://c322-test3-backend-latest-qx4g.onrender.com";
 }
 
 function isLoggedIn() {
