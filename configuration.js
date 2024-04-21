@@ -54,7 +54,7 @@ async function signup() {
     let email = document.getElementById("email").value;
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
-    let customer = {email:email, username: username, password: password}
+    let customer = {username: username, password: password, email:email}
     let request = {
         method: "POST",
         headers: {

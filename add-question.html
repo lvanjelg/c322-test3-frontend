@@ -57,14 +57,15 @@
     </form>
 
     <div id="list" class="cards"></div>
-
+    <script src="configuration.js"></script>
     <script>
-      let host = "http://localhost:8080";
+      let host = getHost();
       let questions = [];
       displayTheQuestions();
-
+    
       async function getAll() {
-        let response = await fetch(host + "/questions");
+        const headers = {'Authorization': `Bearer ${configuration.token()}`};
+        let response = await fetch(host + "/questions", {headers});
         let result = await response.json();
         return result;
       }
@@ -80,9 +81,10 @@
         for (let question of questions) {
           let div = document.createElement("div");
           div.className = "card";
+          const headers = {'Authorization': `Bearer ${configuration.token()}`};
           let innerHtml = `
          
-        <img src="http://localhost:8080/questions/${question.id}/image" alt="question" style="width:100%">
+        <img src="${host}/questions/${question.id}/image,${headers}" alt="question" style="width:100%">
         <div class="container">
           <h4><b>${question.id}</b></h4> 
           <p>${question.description}</p>
@@ -128,11 +130,12 @@
 
       async function addTheQuestion(question, imageFile) {
         let message = "";
-
+        const headers = {'Authorization': `Bearer ${configuration.token()}`};
         let request = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${configuration.token()}`,
           },
           body: JSON.stringify(question),
         };
@@ -159,6 +162,9 @@
         formData.append("file", imageFile);
         let request = {
           method: "POST",
+          headers: {
+            'Authorization': `Bearer ${configuration.token()}`,
+          },
           body: formData,
         };
         let response = await fetch(
